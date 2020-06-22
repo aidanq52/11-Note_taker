@@ -28,14 +28,15 @@ router.post("/notes", (req, res)=>{
             res.json(note);
 
         })
-        .catch((err) => {});
+        .catch((err) => res.status(500).json(err));
 
 })
 
 router.delete("/notes/:id", (req,res) => {
-    //TBD
 
-    console.log('Create Notes');
+    store
+        .deleteNote( req.params.id)
+        .then( ()=> res.json({ok:true}))
 })
 
 module.exports = router;
