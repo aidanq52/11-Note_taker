@@ -4,7 +4,7 @@ const express = require('express');
 const htmlRoutes = require("./routes/htmlRoutes");
 const apiRoutes = require("./routes/apiRoutes")
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json());
@@ -14,6 +14,10 @@ app.use(express.static("public"));
 
 app.use("/api", apiRoutes);
 app.use( htmlRoutes);
+
+app.get("/", (req, res)=>{
+    res.json(path.join(__dirname, "public/js/index.html"))
+})
 
 
 
